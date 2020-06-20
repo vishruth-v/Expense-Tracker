@@ -66,12 +66,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         actions: <Widget>[
                           FlatButton(
+                            // Pop Alert dialog
                             onPressed: () => Navigator.of(context).pop(),
                             child: Text('CANCEL'),
                           ),
                           FlatButton(
                             onPressed: () {
-                              Navigator.of(context).pop();
+                              Navigator.of(context).pop(); //Pop Alert dialog
+                              Navigator.of(context).pop(); //Pop MyApp
+                              // Add new instance of MyApp (to create new project)
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -99,10 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
           if (index == 0) {
             return SummaryCard();
           } else {
-            return Container(
-              height: 50,
-              child: Text('${_expenseList[index - 1].toString()}'),
-            );
+            return ExpenseCard(expense: _expenseList[index - 1]);
           }
         },
         separatorBuilder: (BuildContext context, int index) => const Divider(),
@@ -124,7 +124,7 @@ class MyFloatingActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-        incrementCounter();
+        // incrementCounter();
         showModalBottomSheet(
             context: context,
             // backgroundColor: Colors.red[50],
@@ -148,7 +148,7 @@ class MyFloatingActionButton extends StatelessWidget {
                             ),
                           ),
                         ),
-                        flex: 1,
+                        flex: 2,
                       ),
                       Expanded(
                         child: Row(
@@ -156,12 +156,22 @@ class MyFloatingActionButton extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Icon(
-                                  Icons.camera_alt,
-                                  size: 30,
-                                  color: Color.fromRGBO(0, 0, 0, 0.7),
+                                RawMaterialButton(
+                                  onPressed: () {},
+                                  shape: CircleBorder(
+                                    side: BorderSide(
+                                      color: Colors.redAccent[100],
+                                      width: 0.5,
+                                    ),
+                                  ),
+                                  padding: EdgeInsets.all(12.0),
+                                  child: Icon(
+                                    Icons.camera_alt,
+                                    size: 30,
+                                    color: Color.fromRGBO(0, 0, 0, 0.7),
+                                  ),
                                 ),
                                 Text(
                                   "Scan",
@@ -172,12 +182,22 @@ class MyFloatingActionButton extends StatelessWidget {
                               ],
                             ),
                             Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Icon(
-                                  Icons.mic,
-                                  size: 30,
-                                  color: Color.fromRGBO(0, 0, 0, 0.7),
+                                RawMaterialButton(
+                                  onPressed: () {},
+                                  shape: CircleBorder(
+                                    side: BorderSide(
+                                      color: Colors.redAccent[100],
+                                      width: 0.5,
+                                    ),
+                                  ),
+                                  padding: EdgeInsets.all(12.0),
+                                  child: Icon(
+                                    Icons.mic,
+                                    size: 30,
+                                    color: Color.fromRGBO(0, 0, 0, 0.7),
+                                  ),
                                 ),
                                 Text(
                                   "Voice",
@@ -188,12 +208,22 @@ class MyFloatingActionButton extends StatelessWidget {
                               ],
                             ),
                             Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Icon(
-                                  Icons.assignment,
-                                  size: 30,
-                                  color: Color.fromRGBO(0, 0, 0, 0.7),
+                                RawMaterialButton(
+                                  onPressed: () {},
+                                  shape: CircleBorder(
+                                    side: BorderSide(
+                                      color: Colors.redAccent[100],
+                                      width: 0.5,
+                                    ),
+                                  ),
+                                  padding: EdgeInsets.all(12.0),
+                                  child: Icon(
+                                    Icons.assignment,
+                                    size: 30,
+                                    color: Color.fromRGBO(0, 0, 0, 0.7),
+                                  ),
                                 ),
                                 Text(
                                   "Manual",
@@ -205,11 +235,17 @@ class MyFloatingActionButton extends StatelessWidget {
                             ),
                           ],
                         ),
+                        flex: 3,
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          height: 1,
+                        ),
                         flex: 1,
                       ),
                     ],
                   ),
-                ));
+                )).then((value) => incrementCounter());
       },
       tooltip: 'Add Expense',
       child: Icon(Icons.add),
@@ -288,6 +324,51 @@ class _SummaryCardState extends State<SummaryCard> {
                 ),
               ],
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ExpenseCard extends StatefulWidget {
+  final Map<String, String> expense;
+
+  ExpenseCard({Key key, this.expense}) : super(key: key);
+
+  @override
+  _ExpenseCardState createState() => _ExpenseCardState();
+}
+
+class _ExpenseCardState extends State<ExpenseCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(15.0),
+      child: Container(
+        height: 70,
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            width: 0.1,
+            color: Colors.grey.shade400,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade300,
+              blurRadius: 1.0,
+              offset: Offset(0, 1),
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Text(widget.expense["id"]),
+            Text(widget.expense["amount"]),
+            Text(widget.expense["date"]),
           ],
         ),
       ),
