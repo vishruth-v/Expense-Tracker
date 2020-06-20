@@ -29,12 +29,14 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   String dropdownValue = 'Select';
   DateTime selectedDate = DateTime.now();
+  String amount = '';
   //final format = DateFormat("yyyy-MM-dd");
 
   @override
   Widget build(BuildContext context) {
+    print('Bill amount is: $amount');
     return Padding(
-      padding: const EdgeInsets.only(top:25),
+      padding: const EdgeInsets.only(top: 25),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -77,7 +79,9 @@ class _NewExpenseState extends State<NewExpense> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                  selectedDate == null ? 'Select Date' : selectedDate.toString(),
+                  selectedDate == null
+                      ? 'Select Date'
+                      : selectedDate.toString(),
                 ),
                 RaisedButton(
                   shape: RoundedRectangleBorder(),
@@ -86,7 +90,7 @@ class _NewExpenseState extends State<NewExpense> {
                   color: Colors.red,
                   onPressed: () {
                     showDatePicker(
-                      initialEntryMode: DatePickerEntryMode.input,
+                      //initialEntryMode: DatePickerEntryMode.input,
                       context: context,
                       initialDate:
                           selectedDate == null ? DateTime.now() : selectedDate,
@@ -113,42 +117,36 @@ class _NewExpenseState extends State<NewExpense> {
             ),
             trailing: Container(
               width: 200,
-              child: TextField(),
+              child: TextField(
+                onChanged: (text) {
+                  setState(() {
+                    amount = text;
+                  });
+                },
+              ),
             ),
+          ),
+          SizedBox(
+            height: 200,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FloatingActionButton(
+                onPressed: null,
+                child: Icon(Icons.attach_file),
+                backgroundColor: Colors.red,
+              ),
+              SizedBox(width: 30),
+              FloatingActionButton(
+                onPressed: null,
+                child: Icon(Icons.done),
+                backgroundColor: Colors.red,
+              ),
+            ],
           )
         ],
       ),
     );
   }
 }
-
-// trailing: Row(
-//   children: <Widget>[
-//     // DateTimeField(
-//     //   format: format,
-//     //   onShowPicker: (context, currentValue) {
-//     //     return showDatePicker(
-//     //         context: context,
-//     //         firstDate: DateTime(1900),
-//     //         initialDate: currentValue ?? DateTime.now(),
-//     //         lastDate: DateTime(2100));
-//     //   },
-//     // ),
-//   ],
-// ),
-
-// trailing: RaisedButton(
-//             onPressed: () {
-//               showDatePicker(
-//                 context: context,
-//                 initialDate: DateTime.now(),
-//                 firstDate: DateTime(2001),
-//                 lastDate: DateTime(2030),
-//                 fieldLabelText: selectedDate.toString(),
-//               ).then((date) {
-//                 setState(() {
-//                   selectedDate = date;
-//                 });
-//               });
-//             },
-//           ),
