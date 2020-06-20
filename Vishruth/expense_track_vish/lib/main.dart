@@ -126,24 +126,23 @@ class _NewExpenseState extends State<NewExpense> {
               ),
             ),
           ),
-          SizedBox(
-            height: 200,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              FloatingActionButton(
-                onPressed: null,
-                child: Icon(Icons.attach_file),
-                backgroundColor: Colors.red,
-              ),
-              SizedBox(width: 30),
-              FloatingActionButton(
-                onPressed: null,
-                child: Icon(Icons.done),
-                backgroundColor: Colors.red,
-              ),
-            ],
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                FloatingActionButton(
+                  onPressed: null,
+                  child: Icon(Icons.attach_file),
+                  backgroundColor: Colors.red,
+                ),
+                SizedBox(width: 30),
+                FloatingActionButton(
+                  onPressed: null,
+                  child: Icon(Icons.done),
+                  backgroundColor: Colors.red,
+                ),
+              ],
+            ),
           )
         ],
       ),
