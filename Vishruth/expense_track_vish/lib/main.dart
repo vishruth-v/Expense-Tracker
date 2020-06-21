@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+//import 'package:camera/camera.dart';
 //import 'dart:async';
 
 void main() => runApp(MyApp());
@@ -91,7 +92,9 @@ class _NewExpenseState extends State<NewExpense> {
                       : DateFormat('d/M/yyyy').format(selectedDate).toString(),
                   style: TextStyle(fontSize: 18),
                 ),
-                SizedBox(width: 10,),
+                SizedBox(
+                  width: 10,
+                ),
                 RaisedButton(
                   shape: RoundedRectangleBorder(),
                   textColor: Colors.white,
@@ -143,7 +146,8 @@ class _NewExpenseState extends State<NewExpense> {
                   });
                 },
                 style: TextStyle(fontSize: 20),
-                keyboardType: TextInputType.numberWithOptions(decimal: true, signed: false),
+                keyboardType: TextInputType.numberWithOptions(
+                    decimal: true, signed: false),
                 decoration: InputDecoration(
                   prefixText: "\u20B9  ",
                   errorText: _validate ? 'Invalid Input' : null,
@@ -162,7 +166,57 @@ class _NewExpenseState extends State<NewExpense> {
                 ),
                 SizedBox(width: 30),
                 FloatingActionButton(
-                  onPressed: null,
+                  onPressed: () {
+                    if (_validate == false && dropdownValue != 'Select') {
+                      return showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Submit New expense?',
+                                  style: TextStyle(fontSize: 25)),
+                              content: SingleChildScrollView(
+                                child: ListBody(
+                                  children: <Widget>[
+                                    Text('Bill amount is: $amount'),
+                                    Text('For Category $dropdownValue'),
+                                    Text('Do you confirm?'),
+                                  ],
+                                ),
+                              ),
+                              contentTextStyle:
+                                  TextStyle(fontSize: 18, color: Colors.black),
+                              actions: <Widget>[
+                                FlatButton(
+                                  child: Text('SUBMIT',
+                                      style: TextStyle(fontSize: 18)),
+                                  color: Colors.red,
+                                  onPressed: () {},
+                                )
+                              ],
+                            );
+                          });
+                    }
+                    else {
+                       return showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Invalid Expense Details',
+                                  style: TextStyle(fontSize: 25)),
+                              content: SingleChildScrollView(
+                                child: ListBody(
+                                  children: <Widget>[
+                                    Text('Category or Bill Amount is Invalid'),
+                                    Text('Try Again'),
+                                  ],
+                                ),
+                              ),
+                              contentTextStyle:
+                                  TextStyle(fontSize: 18, color: Colors.black),
+                            );
+                          });
+                    }
+                  },
                   child: Icon(Icons.done),
                   backgroundColor: Colors.red,
                 ),
