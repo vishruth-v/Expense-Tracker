@@ -40,6 +40,10 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera Access needed to scan and attach bills.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Microphone Access needed to recognize voice</string>
 	<false/>
 </dict>
 </plist>
