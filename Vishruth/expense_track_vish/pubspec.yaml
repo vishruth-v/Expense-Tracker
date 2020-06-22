@@ -29,7 +29,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
   datetime_picker_formfield: ^1.0.0
-  camera: 
 
 dev_dependencies:
   flutter_test:
@@ -45,6 +44,11 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  fonts:
+    - family:  MyFlutterApp
+      fonts:
+       - asset: assets/MyFlutterApp.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:
