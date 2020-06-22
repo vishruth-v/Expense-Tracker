@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'approve.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,6 +29,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 1;
   int _id = 0;
+  int _currentIndex = 1;
 
   List<Map<String, String>> _expenseList = [];
 
@@ -44,6 +46,12 @@ class _MyHomePageState extends State<MyHomePage> {
       _id++;
       _addExpense();
       _counter++;
+    });
+  }
+
+  void _updatePageIndex(int index) {
+    setState(() {
+      _currentIndex = index;
     });
   }
 
@@ -111,6 +119,10 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: MyFloatingActionButton(
         incrementCounter: _incrementCounter,
       ),
+      bottomNavigationBar: MyBottomNavigationBar(
+        currentIndex: _currentIndex,
+        updatePageIndex: _updatePageIndex,
+      ),
     );
   }
 }
@@ -159,7 +171,9 @@ class MyFloatingActionButton extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 RawMaterialButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
                                   shape: CircleBorder(
                                     side: BorderSide(
                                       color: Colors.redAccent[100],
@@ -185,7 +199,9 @@ class MyFloatingActionButton extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 RawMaterialButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
                                   shape: CircleBorder(
                                     side: BorderSide(
                                       color: Colors.redAccent[100],
@@ -211,7 +227,9 @@ class MyFloatingActionButton extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 RawMaterialButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
                                   shape: CircleBorder(
                                     side: BorderSide(
                                       color: Colors.redAccent[100],
@@ -366,9 +384,9 @@ class _ExpenseCardState extends State<ExpenseCard> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Text(widget.expense["id"]),
-            Text(widget.expense["amount"]),
-            Text(widget.expense["date"]),
+            Text("Id: ${widget.expense["id"]}"),
+            Text("Amount: Rs. ${widget.expense["amount"]}"),
+            Text("Date: ${widget.expense["date"].substring(0, 19)}"),
           ],
         ),
       ),
