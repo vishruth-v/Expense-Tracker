@@ -44,6 +44,8 @@
 	<string>Camera Access needed to scan and attach bills.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Microphone Access needed to recognize voice</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Need Gallery Access for picking attachment</string>
 	<false/>
 </dict>
 </plist>
