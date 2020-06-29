@@ -1,5 +1,7 @@
+import 'package:expense_tracker/apply.dart';
+import 'package:expense_tracker/navbar.dart';
 import 'package:flutter/material.dart';
-import 'approve.dart';
+// import 'approve.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,8 +13,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.red,
+            ),
+            borderRadius: BorderRadius.circular(6),
+          ),
+        ),
       ),
-      home: MyHomePage(title: 'Expense Track'),
+      home: ApplyPage(),
+      // home: MyHomePage(title: 'Expense Track'),
     );
   }
 }
@@ -62,47 +73,48 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         actions: <Widget>[
           PopupMenuButton<String>(
-              onSelected: (value) {
-                if (value == 'finish') {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text('End Project'),
-                        content: Text(
-                          'Are you sure you want to end tracking expenses of this project?',
+            onSelected: (value) {
+              if (value == 'finish') {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('End Project'),
+                      content: Text(
+                        'Are you sure you want to end tracking expenses of this project?',
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                          // Pop Alert dialog
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text('CANCEL'),
                         ),
-                        actions: <Widget>[
-                          FlatButton(
-                            // Pop Alert dialog
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: Text('CANCEL'),
-                          ),
-                          FlatButton(
-                            onPressed: () {
-                              Navigator.of(context).pop(); //Pop Alert dialog
-                              Navigator.of(context).pop(); //Pop MyApp
-                              // Add new instance of MyApp (to create new project)
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => MyApp(),
-                                  ));
-                            },
-                            child: Text('CONFIRM'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-              },
-              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                    const PopupMenuItem<String>(
-                      value: 'finish',
-                      child: Text('End Project'),
-                    ),
-                  ]),
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(); //Pop Alert dialog
+                            Navigator.of(context).pop(); //Pop MyApp
+                            // Add new instance of MyApp (to create new project)
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MyApp(),
+                                ));
+                          },
+                          child: Text('CONFIRM'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: 'finish',
+                child: Text('End Project'),
+              ),
+            ],
+          ),
         ],
       ),
       body: ListView.separated(
