@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 //void main() => runApp(MyApp());
 
 enum AttachOption { camera, gallery }
@@ -38,22 +37,26 @@ class _NewExpenseState extends State<NewExpense> {
   String dropdownValue = 'Select';
   DateTime selectedDate = DateTime.now();
   String billno;
+  String vendor;
   double amount;
   bool _validate = false;
   String description;
   List<String> _categories = [
     'Select',
-    'Travel',
+    'Travel Fare',
+    'Loding',
     'Food',
-    'Materials',
-    'Conveyence'
+    'Purchase/Service',
+    'Conveyence',
+    'Allowance',
+    'Miscillaneous'
   ];
 
   List<String> _attachOptions = ['Camera', 'Gallery'];
 
   String attachOption;
 
-  File _image;
+  File image;
   final picker = ImagePicker();
   AttachOption _attachoption;
   //final format = DateFormat("yyyy-MM-dd");
@@ -100,11 +103,25 @@ class _NewExpenseState extends State<NewExpense> {
                 Divider(),
                 TextField(
                   decoration: InputDecoration(
-                      labelText: 'Bill Number:',
+                      labelText: 'Bill No:',
                       labelStyle: TextStyle(color: Colors.black, fontSize: 20)),
                   onChanged: (String text) {
                     setState(() {
                       billno = text;
+                    });
+                  },
+                  style: TextStyle(fontSize: 22),
+                ),
+                Divider(
+                  height: 30,
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                      labelText: 'Vendor:',
+                      labelStyle: TextStyle(color: Colors.black, fontSize: 20)),
+                  onChanged: (String text) {
+                    setState(() {
+                      vendor = text;
                     });
                   },
                   style: TextStyle(fontSize: 22),
@@ -224,10 +241,27 @@ class _NewExpenseState extends State<NewExpense> {
               ],
             ),
           ),
+          Container(
+            margin: EdgeInsets.only(
+              bottom: 10,
+            ),
+            alignment: AlignmentDirectional.bottomStart,
+            width: image == null ? 135 : 150,
+            height: image == null ? null : 100,
+            child: image == null
+                ? Text(
+                    'Attach',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  )
+                : Image.file(image),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               PopupMenuButton<AttachOption>(
+                tooltip: 'Attach Bill Image',
                 child: FloatingActionButton(
                   child: Icon(Icons.attach_file),
                   onPressed: null,
@@ -278,6 +312,7 @@ class _NewExpenseState extends State<NewExpense> {
                 onPressed: _submitDialog,
                 child: Icon(Icons.done),
                 backgroundColor: Colors.red,
+                tooltip: 'Submit Expense',
               ),
             ],
           )
@@ -369,7 +404,7 @@ class _NewExpenseState extends State<NewExpense> {
 
     if (pickedFile != null) {
       setState(() {
-        _image = File(pickedFile.path);
+        image = File(pickedFile.path);
       });
     }
   }
@@ -379,7 +414,7 @@ class _NewExpenseState extends State<NewExpense> {
 
     if (pickedFile != null) {
       setState(() {
-        _image = File(pickedFile.path);
+        image = File(pickedFile.path);
       });
     }
   }
