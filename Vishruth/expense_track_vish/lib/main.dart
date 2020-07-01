@@ -1,6 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
-import 'allprojects.dart';
+//import 'allprojects.dart';
 
-void main() => runApp(AllProjectsMain());
+import 'newexpense.dart';
 
+//import 'speech.dart';
+
+//void main() => runApp(AllProjectsMain());
+
+void main() => runApp(NewExpenseMain());
+
+//void main() => runApp(SpeechMain());
