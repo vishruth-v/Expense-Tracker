@@ -127,8 +127,10 @@ class NewCard extends StatelessWidget {
           ],
         ),
       ),
-      onPressed:
-          () {}, //ONLY if staus == Approval.approved, user should be able to add expense
+      //ONLY if staus == Approval.approved, user should be able to add expense
+      onPressed: () {
+        Navigator.pushNamed(context, '/current');
+      },
     );
   }
 }

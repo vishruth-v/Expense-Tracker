@@ -125,7 +125,8 @@ class _MyHomePageState extends State<MyHomePage> {
             return ExpenseCard(expense: _expenseList[index - 1]);
           }
         },
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
+        separatorBuilder: (BuildContext context, int index) =>
+            const Divider(),
         itemCount: _counter,
       ),
       floatingActionButton: MyFloatingActionButton(
@@ -184,7 +185,8 @@ class MyFloatingActionButton extends StatelessWidget {
                               children: <Widget>[
                                 RawMaterialButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop();
+                                    Navigator.pop(context);
+                                    Navigator.pushNamed(context, '/new');
                                   },
                                   shape: CircleBorder(
                                     side: BorderSide(
@@ -212,7 +214,8 @@ class MyFloatingActionButton extends StatelessWidget {
                               children: <Widget>[
                                 RawMaterialButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop();
+                                    Navigator.pop(context);
+                                    Navigator.pushNamed(context, '/new');
                                   },
                                   shape: CircleBorder(
                                     side: BorderSide(
@@ -240,7 +243,8 @@ class MyFloatingActionButton extends StatelessWidget {
                               children: <Widget>[
                                 RawMaterialButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop();
+                                    Navigator.pop(context);
+                                    Navigator.pushNamed(context, '/new');
                                   },
                                   shape: CircleBorder(
                                     side: BorderSide(

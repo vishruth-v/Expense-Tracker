@@ -9,13 +9,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Widget> project = [];
-
-  String employeeName = 'abc';
-  String projectName = 'def';
-  String location = 'ghi';
-  int amount = 100;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,42 +17,49 @@ class _MyAppState extends State<MyApp> {
           title: Center(child: Text('Approve Request')),
           backgroundColor: Colors.red,
         ),
-        body: new Container(
-          child: new ListView.builder(
-            itemBuilder: (_, int index) {
-              project.add(
-                  ProjectCard(employeeName, projectName, location, amount));
-              return ProjectCard(employeeName, projectName, location, amount);
-            },
-            itemCount: 10,
-          ),
-        ),
+        body: Approvals(),
+      ),
+    );
+  }
+}
+
+class Approvals extends StatefulWidget {
+  @override
+  _ApprovalsState createState() => _ApprovalsState();
+}
+
+class _ApprovalsState extends State<Approvals> {
+  List<Widget> project = [];
+  String employeeName = 'abc';
+  String projectName = 'def';
+  String location = 'ghi';
+  int amount = 100;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ListView.builder(
+        itemBuilder: (_, int index) {
+          // project.add(ProjectCard(employeeName, projectName, location, amount));
+          return ProjectCard(employeeName, projectName, location, amount);
+        },
+        itemCount: 10,
       ),
     );
   }
 }
 
 class ProjectCard extends StatefulWidget {
-  String employeeName;
-  String projectName;
-  String location;
-  int amount;
+  final String employeeName;
+  final String projectName;
+  final String location;
+  final int amount;
 
   ProjectCard(this.employeeName, this.projectName, this.location, this.amount);
   @override
-  _ProjectCardState createState() =>
-      _ProjectCardState(employeeName, projectName, location, amount);
+  _ProjectCardState createState() => _ProjectCardState();
 }
 
 class _ProjectCardState extends State<ProjectCard> {
-  String employeeName;
-  String projectName;
-  String location;
-  int amount;
-
-  _ProjectCardState(
-      this.employeeName, this.projectName, this.location, this.amount);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -93,7 +93,7 @@ class _ProjectCardState extends State<ProjectCard> {
                         width: 20.0,
                       ),
                       Text(
-                        '$employeeName',
+                        '${widget.employeeName}',
                       ),
                     ],
                   ),
@@ -110,7 +110,7 @@ class _ProjectCardState extends State<ProjectCard> {
                         width: 20.0,
                       ),
                       Text(
-                        '$projectName',
+                        '${widget.projectName}',
                       ),
                     ],
                   ),
@@ -127,7 +127,7 @@ class _ProjectCardState extends State<ProjectCard> {
                         width: 20.0,
                       ),
                       Text(
-                        '$location',
+                        '${widget.location}',
                       ),
                     ],
                   ),
@@ -143,7 +143,7 @@ class _ProjectCardState extends State<ProjectCard> {
                       SizedBox(
                         width: 20.0,
                       ),
-                      Text('$amount'),
+                      Text('${widget.amount}'),
                     ],
                   ),
                 ],

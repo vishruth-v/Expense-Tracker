@@ -14,16 +14,27 @@ class NewExpenseMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('New Expense'),
-          backgroundColor: Colors.red,
-        ),
-        body: SafeArea(
-          child: NewExpense(),
-        ),
-        backgroundColor: Colors.white,
+      home: NewExpensePage(),
+    );
+  }
+}
+
+class NewExpensePage extends StatelessWidget {
+  const NewExpensePage({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('New Expense'),
+        backgroundColor: Colors.red,
       ),
+      body: SafeArea(
+        child: NewExpense(),
+      ),
+      backgroundColor: Colors.white,
     );
   }
 }
@@ -343,41 +354,45 @@ class _NewExpenseState extends State<NewExpense> {
     if (_validate == false &&
         dropdownValue != 'Select' &&
         selectedDate != null) {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title:
-                  Text('Submit New expense?', style: TextStyle(fontSize: 25)),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: <Widget>[
-                    Text('Bill amount is: $amount'),
-                    Text('For Category $dropdownValue'),
-                    Text('Do you confirm?'),
-                  ],
-                ),
+      showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Submit New expense?', style: TextStyle(fontSize: 25)),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('Bill amount is: $amount'),
+                  Text('For Category $dropdownValue'),
+                  Text('Do you confirm?'),
+                ],
               ),
-              contentTextStyle: TextStyle(fontSize: 18, color: Colors.black),
-              actions: <Widget>[
-                FlatButton(
-                    child: Text(
-                      'CANCEL',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.red,
-                      ),
+            ),
+            contentTextStyle: TextStyle(fontSize: 18, color: Colors.black),
+            actions: <Widget>[
+              FlatButton(
+                  child: Text(
+                    'CANCEL',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.red,
                     ),
-                    //color: Colors.red,
-                    onPressed: () {}),
-                FlatButton(
-                  child: Text('SUBMIT', style: TextStyle(fontSize: 18)),
-                  color: Colors.red,
-                  onPressed: () {},
-                )
-              ],
-            );
-          });
+                  ),
+                  //color: Colors.red,
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  }),
+              FlatButton(
+                child: Text('SUBMIT', style: TextStyle(fontSize: 18)),
+                color: Colors.red,
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+              )
+            ],
+          );
+        },
+      ).then((value) => value ? Navigator.pop(context) : null);
     } else {
       showDialog(
           context: context,
