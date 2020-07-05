@@ -41,12 +41,15 @@ class AppRootPage extends StatefulWidget {
 }
 
 class _AppRootPageState extends State<AppRootPage> {
+  int index = 1;
+  List<int> visited = [];
+
   static final _navigatorKeys = [
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
   ];
-  int index = 1;
+
   List<Widget> pages = [
     Navigator(
       key: _navigatorKeys[0],
@@ -105,7 +108,6 @@ class _AppRootPageState extends State<AppRootPage> {
       },
     ),
   ];
-  List<int> visited = [];
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +136,9 @@ class _AppRootPageState extends State<AppRootPage> {
           onTap: (value) {
             if (value != index) {
               setState(() {
+                if (value != 1) {
+                  visited.remove(value);
+                }
                 visited.add(index);
                 index = value;
               });
@@ -162,15 +167,3 @@ class _AppRootPageState extends State<AppRootPage> {
     );
   }
 }
-
-// import 'allprojects.dart';
-
-// import 'newexpense.dart';
-
-// import 'speech.dart';
-
-// void main() => runApp(AllProjectsMain());
-
-// void main() => runApp(NewExpenseMain());
-
-// void main() => runApp(SpeechMain());
