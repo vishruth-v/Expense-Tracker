@@ -34,6 +34,134 @@ class _ApplicationFormState extends State<ApplicationForm> {
   bool _isAccompaniedByFamily = false;
   bool _isDomestic = true;
   bool _isDense = true;
+  int _journeyCount = 1;
+  List<Widget> _journeyDetails;
+
+  @override
+  void initState() {
+    _journeyDetails = <Widget>[myExpandableTile(_journeyCount)];
+    super.initState();
+  }
+
+  Widget myExpandableTile(int itemKey) {
+    return Dismissible(
+      key: Key(itemKey.toString()),
+      // onDismissed: (direction) {
+      //   setState(() {
+      //   _journeyDetails.removeAt(itemKey - 1);
+      //   });
+      // },
+      background: Container(
+        color: Colors.red,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Icon(
+                Icons.delete,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 15.0),
+              child: Icon(
+                Icons.delete,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
+          ],
+        ),
+      ),
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+        decoration: BoxDecoration(
+          // borderRadius: BorderRadius.circular(6),
+          border: Border.all(
+            width: 0.1,
+            color: Colors.grey,
+          ),
+        ),
+        child: ExpansionTile(
+          initiallyExpanded: true,
+          title: Text('Details'),
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8.0, 3.0, 8.0, 0.0),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: TextFormField(
+                      validator: (value) =>
+                          value.isEmpty ? 'Cant be empty' : null,
+                      decoration: InputDecoration(labelText: "From Country"),
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.next,
+                      onFieldSubmitted: (value) =>
+                          FocusScope.of(context).nextFocus(),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 8.0,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: TextFormField(
+                      validator: (value) =>
+                          value.isEmpty ? 'Cant be empty' : null,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(labelText: "To Country"),
+                      textInputAction: TextInputAction.next,
+                      onFieldSubmitted: (value) =>
+                          FocusScope.of(context).unfocus(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: TextFormField(
+                      validator: (value) =>
+                          value.isEmpty ? 'Cant be empty' : null,
+                      decoration: InputDecoration(labelText: "From City"),
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.next,
+                      onFieldSubmitted: (value) =>
+                          FocusScope.of(context).nextFocus(),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 8.0,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: TextFormField(
+                      validator: (value) =>
+                          value.isEmpty ? 'Cant be empty' : null,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(labelText: "To City"),
+                      textInputAction: TextInputAction.next,
+                      onFieldSubmitted: (value) =>
+                          FocusScope.of(context).unfocus(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 12.0),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,9 +257,8 @@ class _ApplicationFormState extends State<ApplicationForm> {
                 Expanded(
                   flex: 1,
                   child: DropdownButtonFormField<String>(
-                    validator: (value) => value == 'Please Select'
-                        ? 'Select a valid code'
-                        : null,
+                    validator: (value) =>
+                        value == 'Please Select' ? 'Select a valid code' : null,
                     decoration: InputDecoration(labelText: "Project Code"),
                     value: dropdownValue2,
                     icon: Icon(Icons.arrow_drop_down),
@@ -342,6 +469,60 @@ class _ApplicationFormState extends State<ApplicationForm> {
               onFieldSubmitted: (value) => FocusScope.of(context).unfocus(),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+            child: Divider(
+              thickness: 1.0,
+              indent: 5.0,
+              endIndent: 5.0,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(14.0, 8.0, 8.0, 8.0),
+            child: Center(
+              child: Text(
+                'Journey Details',
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
+              ),
+            ),
+          ),
+          ..._journeyDetails,
+          Center(
+            child: FlatButton.icon(
+              onPressed: () {
+                setState(() {
+                  _journeyCount++;
+                  _journeyDetails.add(myExpandableTile(_journeyCount));
+                });
+              },
+              icon: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              label: Text(
+                'Add',
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.red,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+            child: Divider(
+              thickness: 1.0,
+              indent: 5.0,
+              endIndent: 5.0,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(14.0, 8.0, 8.0, 8.0),
+            child: Center(
+              child: Text(
+                'Journey Details',
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
+              ),
+            ),
+          ),
           Center(
             child: FlatButton(
               child: Text(
@@ -352,13 +533,50 @@ class _ApplicationFormState extends State<ApplicationForm> {
               onPressed: () {
                 if (_formKey.currentState.validate()) {
                   // If the form is valid, display a Snackbar.
-                  Scaffold.of(context).showSnackBar(
-                      SnackBar(content: Text('Processing Data')));
+                  Scaffold.of(context)
+                      .showSnackBar(SnackBar(content: Text('Processing Data')));
                 }
               },
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class MyExpandableTile extends StatefulWidget {
+  final String itemKey;
+
+  const MyExpandableTile({Key key, @required this.itemKey}) : super(key: key);
+
+  @override
+  _MyExpandableTileState createState() => _MyExpandableTileState();
+}
+
+class _MyExpandableTileState extends State<MyExpandableTile> {
+  @override
+  Widget build(BuildContext context) {
+    return Dismissible(
+      key: Key('1'),
+      background: Container(color: Colors.red),
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+        decoration: BoxDecoration(
+          // borderRadius: BorderRadius.circular(6),
+          border: Border.all(
+            width: 0.1,
+            color: Colors.grey,
+          ),
+        ),
+        child: ExpansionTile(
+          title: Text('Journey ' + widget.itemKey),
+          children: <Widget>[
+            Text('abc'),
+            Text('abc'),
+            Text('abc'),
+          ],
+        ),
       ),
     );
   }
