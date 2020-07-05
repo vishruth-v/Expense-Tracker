@@ -30,7 +30,7 @@ class _SignUpPageState extends State<SignUpPage> {
             child: ListView(
               children: <Widget>[
                 Image(
-                  image: AssetImage('images/sample.jpg'),
+                  image: AssetImage('images/achintyologo.png'),
                   height: 200.0,
                 ),
                 SizedBox(
@@ -171,6 +171,10 @@ class _LoginPageState extends State<LoginPage> {
             padding: EdgeInsets.all(16),
             child: ListView(
               children: <Widget>[
+                Image(
+                  image: AssetImage('images/achintyologo.png'),
+                  height: 200.0,
+                ),
                 SizedBox(
                   height: 20.0,
                 ),

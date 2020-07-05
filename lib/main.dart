@@ -47,7 +47,6 @@ class _AppRootPageState extends State<AppRootPage> {
     GlobalKey<NavigatorState>(),
   ];
   int index = 1;
-  List<String> titles = ['Apply', 'Expense Track', 'Approve'];
   List<Widget> pages = [
     Navigator(
       key: _navigatorKeys[0],
@@ -58,7 +57,6 @@ class _AppRootPageState extends State<AppRootPage> {
         );
       },
     ),
-    // ApplicationForm(),
     Navigator(
       key: _navigatorKeys[1],
       onGenerateRoute: (settings) {
@@ -106,7 +104,6 @@ class _AppRootPageState extends State<AppRootPage> {
         );
       },
     ),
-    // approve.Approvals(),
   ];
   List<int> visited = [];
 
@@ -128,9 +125,6 @@ class _AppRootPageState extends State<AppRootPage> {
         }
       },
       child: Scaffold(
-        // appBar: AppBar(
-        //   title: Text(titles[index]),
-        // ),
         body: IndexedStack(
           index: index,
           children: pages,
