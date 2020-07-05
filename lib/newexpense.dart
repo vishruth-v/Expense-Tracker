@@ -6,18 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 
-//void main() => runApp(MyApp());
-
 enum AttachOption { camera, gallery }
-
-class NewExpenseMain extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: NewExpensePage(),
-    );
-  }
-}
 
 class NewExpensePage extends StatelessWidget {
   const NewExpensePage({

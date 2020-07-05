@@ -1,24 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+class ApprovePage extends StatelessWidget {
+  const ApprovePage({
+    Key key,
+  }) : super(key: key);
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Center(child: Text('Approve Request')),
-          backgroundColor: Colors.red,
-        ),
-        body: Approvals(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Approve Request'),
+        backgroundColor: Colors.red,
       ),
+      body: Approvals(),
     );
   }
 }
@@ -65,7 +60,7 @@ class _ProjectCardState extends State<ProjectCard> {
     return Container(
       height: 150.0,
       child: GestureDetector(
-        onTap: () => {},
+        onTap: () => Navigator.pushNamed(context, '/details'),
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Card(

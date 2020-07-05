@@ -1,46 +1,15 @@
-import 'package:expense_track/apply.dart';
-// import 'package:expense_tracker/navbar.dart';
 import 'package:flutter/material.dart';
-// import 'approve.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.red,
-            ),
-            borderRadius: BorderRadius.circular(6),
-          ),
-        ),
-      ),
-      home: ApplyPage(),
-      // home: MyHomePage(title: 'Expense Track'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
+class CurrentProjectPage extends StatefulWidget {
+  CurrentProjectPage({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _CurrentProjectPageState createState() => _CurrentProjectPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _CurrentProjectPageState extends State<CurrentProjectPage> {
   int _counter = 1;
   int _id = 0;
-  int _currentIndex = 1;
 
   List<Map<String, String>> _expenseList = [];
 
@@ -60,17 +29,11 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _updatePageIndex(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Expense Track'),
         actions: <Widget>[
           PopupMenuButton<String>(
             onSelected: (value) {
@@ -92,13 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         FlatButton(
                           onPressed: () {
                             Navigator.of(context).pop(); //Pop Alert dialog
-                            Navigator.of(context).pop(); //Pop MyApp
-                            // Add new instance of MyApp (to create new project)
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MyApp(),
-                                ));
+                            Navigator.of(context).pop(); //Pop CurrentProject
                           },
                           child: Text('CONFIRM'),
                         ),
@@ -132,10 +89,6 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: MyFloatingActionButton(
         incrementCounter: _incrementCounter,
       ),
-      // bottomNavigationBar: MyBottomNavigationBar(
-      //   currentIndex: _currentIndex,
-      //   updatePageIndex: _updatePageIndex,
-      // ),
     );
   }
 }

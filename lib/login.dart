@@ -3,25 +3,12 @@ import 'package:flutter/material.dart';
 // import 'package:validators/validators.dart' as validator;
 // import 'package:expense_track/main.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: TestForm(),
-    );
-  }
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class TestForm extends StatefulWidget {
-  @override
-  _TestFormState createState() => _TestFormState();
-}
-
-class _TestFormState extends State<TestForm> {
+class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -32,6 +19,9 @@ class _TestFormState extends State<TestForm> {
         (MediaQuery.of(context).size.width - (padding * 2)) / 2.0;
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Sign Up'),
+      ),
       body: Center(
         child: Form(
           key: _formKey,
@@ -172,9 +162,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: Colors.red,
-        title: Center(
-          child: Text('Log In'),
-        ),
+        title: Text('Log In'),
       ),
       body: Center(
         child: Form(

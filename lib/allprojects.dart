@@ -3,45 +3,22 @@ import 'package:flutter/material.dart';
 import 'assetscripts/my_flutter_app_icons.dart';
 import 'package:intl/intl.dart';
 
-//void main() => runApp(MyApp());
-
 enum Approval { approved, rejected, pending }
 
-class AllProjectsMain extends StatelessWidget {
+class AllProjectsPage extends StatelessWidget {
+  const AllProjectsPage({
+    Key key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Expense Tracker'),
-          backgroundColor: Colors.red,
-        ),
-        body: SafeArea(
-          child: AllProjects(),
-        ),
-        backgroundColor: Colors.white,
-
-        //BOTTOM NAVIGATION BAR
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.red,
-          iconSize: 28,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              //Use if custom icon to be used
-              //icon: Icon(MyFlutterApp.addchart_24px), title: Text('Apply')),
-              icon: Icon(Icons.add_box),
-              title: Text('Apply'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.assessment),
-              title: Text('Requests'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.assignment_turned_in),
-              title: Text('Approve'),
-            ),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Expense Track'),
+        backgroundColor: Colors.red,
+      ),
+      body: SafeArea(
+        child: AllProjects(),
       ),
     );
   }

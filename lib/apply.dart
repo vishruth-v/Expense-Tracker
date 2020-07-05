@@ -1,4 +1,3 @@
-// import 'package:expense_tracker/navbar.dart';
 import 'package:flutter/material.dart';
 
 class ApplyPage extends StatefulWidget {
@@ -14,9 +13,6 @@ class _ApplyPageState extends State<ApplyPage> {
         title: Text('Apply For Travel'),
       ),
       body: ApplicationForm(),
-      // bottomNavigationBar: MyBottomNavigationBar(
-      //   currentIndex: 0,
-      // ),
     );
   }
 }

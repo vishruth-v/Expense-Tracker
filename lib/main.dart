@@ -1,15 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:expense_track/login.dart' as login;
+import 'package:expense_track/login.dart';
 import 'package:expense_track/apply.dart';
 import 'package:expense_track/allprojects.dart';
-import 'package:expense_track/approve.dart' as approve;
+import 'package:expense_track/approve.dart';
 import 'package:expense_track/currentproject.dart';
 import 'package:expense_track/newexpense.dart';
-
-import 'apply.dart';
-import 'currentproject.dart';
-import 'newexpense.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,42 +15,64 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Expense Track',
       routes: {
-        '/login': (context) => login.TestForm(),
-        '/home': (context) => MyScaffold(),
+        '/login': (context) => SignUpPage(),
+        '/home': (context) => AppRootPage(),
       },
       theme: ThemeData(
         primarySwatch: Colors.red,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.red,
+            ),
+            borderRadius: BorderRadius.circular(6),
+          ),
+        ),
       ),
       initialRoute: '/login',
     );
   }
 }
 
-class MyScaffold extends StatefulWidget {
+class AppRootPage extends StatefulWidget {
   @override
-  _MyScaffoldState createState() => _MyScaffoldState();
+  _AppRootPageState createState() => _AppRootPageState();
 }
 
-class _MyScaffoldState extends State<MyScaffold> {
-  static final _navigatorKey = GlobalKey<NavigatorState>();
+class _AppRootPageState extends State<AppRootPage> {
+  static final _navigatorKeys = [
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
+  ];
   int index = 1;
   List<String> titles = ['Apply', 'Expense Track', 'Approve'];
   List<Widget> pages = [
-    ApplicationForm(),
     Navigator(
-      key: _navigatorKey,
+      key: _navigatorKeys[0],
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => ApplyPage(),
+        );
+      },
+    ),
+    // ApplicationForm(),
+    Navigator(
+      key: _navigatorKeys[1],
       onGenerateRoute: (settings) {
         WidgetBuilder builder;
-        
+
         switch (settings.name) {
           case '/':
-            builder = (context) => AllProjects();
+            builder = (context) => AllProjectsPage();
             break;
           case '/current':
-            builder = (context) => MyHomePage(title: 'Expense Track',);
+            builder = (context) => CurrentProjectPage();
             break;
           case '/new':
-            builder = (context) =>  NewExpensePage();
+            builder = (context) => NewExpensePage();
             break;
           default:
             break;
@@ -66,7 +84,29 @@ class _MyScaffoldState extends State<MyScaffold> {
         );
       },
     ),
-    approve.Approvals(),
+    Navigator(
+      key: _navigatorKeys[2],
+      onGenerateRoute: (settings) {
+        WidgetBuilder builder;
+
+        switch (settings.name) {
+          case '/':
+            builder = (context) => ApprovePage();
+            break;
+          case '/details':
+            builder = (context) => ApplyPage();
+            break;
+          default:
+            break;
+        }
+
+        return MaterialPageRoute(
+          builder: builder,
+          settings: settings,
+        );
+      },
+    ),
+    // approve.Approvals(),
   ];
   List<int> visited = [];
 
@@ -74,8 +114,8 @@ class _MyScaffoldState extends State<MyScaffold> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        if (_navigatorKey.currentState.canPop()) {
-          _navigatorKey.currentState.pop();
+        if (_navigatorKeys[index].currentState.canPop()) {
+          _navigatorKeys[index].currentState.pop();
           return Future<bool>.value(false);
         }
         if (visited.isEmpty) {
@@ -88,9 +128,9 @@ class _MyScaffoldState extends State<MyScaffold> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(titles[index]),
-        ),
+        // appBar: AppBar(
+        //   title: Text(titles[index]),
+        // ),
         body: IndexedStack(
           index: index,
           children: pages,
