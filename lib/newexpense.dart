@@ -59,7 +59,6 @@ class _NewExpenseState extends State<NewExpense> {
   File image;
   final picker = ImagePicker();
   AttachOption _attachoption;
-  //final format = DateFormat("yyyy-MM-dd");
 
   @override
   Widget build(BuildContext context) {
@@ -103,11 +102,11 @@ class _NewExpenseState extends State<NewExpense> {
                 Divider(),
                 TextField(
                   decoration: InputDecoration(
-                      labelText: 'Bill No:',
+                      labelText: 'Vendor:',
                       labelStyle: TextStyle(color: Colors.black, fontSize: 20)),
                   onChanged: (String text) {
                     setState(() {
-                      billno = text;
+                      vendor = text;
                     });
                   },
                   style: TextStyle(fontSize: 22),
@@ -117,11 +116,11 @@ class _NewExpenseState extends State<NewExpense> {
                 ),
                 TextField(
                   decoration: InputDecoration(
-                      labelText: 'Vendor:',
+                      labelText: 'Bill No:',
                       labelStyle: TextStyle(color: Colors.black, fontSize: 20)),
                   onChanged: (String text) {
                     setState(() {
-                      vendor = text;
+                      billno = text;
                     });
                   },
                   style: TextStyle(fontSize: 22),
@@ -135,8 +134,11 @@ class _NewExpenseState extends State<NewExpense> {
                 InkWell(
                   child: InputDecorator(
                     decoration: InputDecoration(
-                      labelText: 'Date:',
-                    ),
+                        labelText: 'Date:',
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        )),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
