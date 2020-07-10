@@ -333,36 +333,41 @@ class ExpenseCard extends StatefulWidget {
 class _ExpenseCardState extends State<ExpenseCard> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(15.0),
-      child: Container(
-        height: 70,
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            width: 0.1,
-            color: Colors.grey.shade400,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade300,
-              blurRadius: 1.0,
-              offset: Offset(0, 1),
+    return GestureDetector(
+      child: Padding(
+        padding: EdgeInsets.all(15.0),
+        child: Container(
+          height: 70,
+          decoration: BoxDecoration(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              width: 0.1,
+              color: Colors.grey.shade400,
             ),
-          ],
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Text("Id: ${widget.expense["id"]}"),
-            Text(
-                "Amount: ${numberformatter.format(double.parse(widget.expense["amount"]))}"),
-            Text("Date: ${widget.expense["date"]}"),
-          ],
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade300,
+                blurRadius: 1.0,
+                offset: Offset(0, 1),
+              ),
+            ],
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Text("Id: ${widget.expense["id"]}"),
+              Text(
+                  "Amount: ${numberformatter.format(double.parse(widget.expense["amount"]))}"),
+              Text("Date: ${widget.expense["date"]}"),
+            ],
+          ),
         ),
       ),
+      onTap: () {
+        Navigator.pushNamed(context, '/expense');
+      },
     );
   }
 }
