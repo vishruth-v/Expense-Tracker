@@ -1,0 +1,4 @@
+1. Hide bottom navigation bar when adding new expense.
+2. Add new expense tile only if new expense is submitted.
+3. Add backend logic
+4. Testing

@@ -118,7 +118,14 @@ class _AppRootPageState extends State<AppRootPage> {
           return Future<bool>.value(false);
         }
         if (visited.isEmpty) {
-          return Future<bool>.value(true);
+          if (index != 1) {
+            setState(() {
+              index = 1;
+            });
+            return Future<bool>.value(false);
+          } else {
+            return Future<bool>.value(true);
+          }
         } else {
           setState(() {
             index = visited.removeLast();
@@ -136,9 +143,7 @@ class _AppRootPageState extends State<AppRootPage> {
           onTap: (value) {
             if (value != index) {
               setState(() {
-                if (value != 1) {
-                  visited.remove(value);
-                }
+                visited.remove(value);
                 visited.add(index);
                 index = value;
               });
