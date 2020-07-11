@@ -6,6 +6,8 @@ import 'package:expense_track/allprojects.dart';
 import 'package:expense_track/approve.dart';
 import 'package:expense_track/currentproject.dart';
 import 'package:expense_track/newexpense.dart';
+import 'package:expense_track/approvaldetails.dart';
+import 'package:expense_track/expensedetails.dart';
 
 void main() => runApp(MyApp());
 
@@ -75,6 +77,12 @@ class _AppRootPageState extends State<AppRootPage> {
           case '/new':
             builder = (context) => NewExpensePage();
             break;
+          case '/expense':
+            builder = (context) => ExpenseDetailsPage();
+            break;
+          case '/image':
+            builder = (context) => ImageFullScreenPage();
+            break;
           default:
             break;
         }
@@ -95,7 +103,7 @@ class _AppRootPageState extends State<AppRootPage> {
             builder = (context) => ApprovePage();
             break;
           case '/details':
-            builder = (context) => ApplyPage();
+            builder = (context) => ApprovalDetailsPage();
             break;
           default:
             break;
