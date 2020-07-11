@@ -6,6 +6,8 @@ import 'package:expense_track/allprojects.dart';
 import 'package:expense_track/approve.dart';
 import 'package:expense_track/currentproject.dart';
 import 'package:expense_track/newexpense.dart';
+import 'package:expense_track/approvaldetails.dart';
+import 'package:expense_track/expensedetails.dart';
 
 void main() => runApp(MyApp());
 
@@ -75,6 +77,12 @@ class _AppRootPageState extends State<AppRootPage> {
           case '/new':
             builder = (context) => NewExpensePage();
             break;
+          case '/expense':
+            builder = (context) => ExpenseDetailsPage();
+            break;
+          case '/image':
+            builder = (context) => ImageFullScreenPage();
+            break;
           default:
             break;
         }
@@ -95,7 +103,7 @@ class _AppRootPageState extends State<AppRootPage> {
             builder = (context) => ApprovePage();
             break;
           case '/details':
-            builder = (context) => ApplyPage();
+            builder = (context) => ApprovalDetailsPage();
             break;
           default:
             break;
@@ -118,7 +126,14 @@ class _AppRootPageState extends State<AppRootPage> {
           return Future<bool>.value(false);
         }
         if (visited.isEmpty) {
-          return Future<bool>.value(true);
+          if (index != 1) {
+            setState(() {
+              index = 1;
+            });
+            return Future<bool>.value(false);
+          } else {
+            return Future<bool>.value(true);
+          }
         } else {
           setState(() {
             index = visited.removeLast();
@@ -136,9 +151,7 @@ class _AppRootPageState extends State<AppRootPage> {
           onTap: (value) {
             if (value != index) {
               setState(() {
-                if (value != 1) {
-                  visited.remove(value);
-                }
+                visited.remove(value);
                 visited.add(index);
                 index = value;
               });

@@ -30,13 +30,25 @@ class AllProjects extends StatefulWidget {
 }
 
 class _AllProjectsState extends State<AllProjects> {
+  final int projectid = 0;
+  final String location = 'Bangalore';
+  final String travelnature = 'Project Visit';
+  final DateTime appdate = DateTime.now();
+  final double budget = 12345;
+  final double spent = 123;
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: 10,
       itemBuilder: (BuildContext context, int index) {
         return NewCard(
-          number: index + 1,
+          projectid: index + 1,
+          location: location,
+          travelnature: travelnature,
+          appdate: appdate,
+          budget: budget,
+          spent: spent,
         );
       },
     );
@@ -45,10 +57,25 @@ class _AllProjectsState extends State<AllProjects> {
 
 class NewCard extends StatelessWidget {
   //Constructor to get project id/number when called
-  NewCard({Key key, this.number}) : super(key: key);
+  NewCard(
+      {Key key,
+      this.projectid,
+      this.location,
+      this.travelnature,
+      this.appdate,
+      this.budget,
+      this.spent})
+      : super(key: key);
 
-  final int number;
+  final int projectid;
+  final String location;
+  final String travelnature;
+  final DateTime appdate;
+  final double budget;
+  final double spent;
+
   Approval status = Approval.approved; //Optional to keep status
+  final numberformatter = NumberFormat('\u20B9##,##,##0', 'en_GB');
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +83,13 @@ class NewCard extends StatelessWidget {
       padding: EdgeInsets.all(0),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        elevation: 4,
+        elevation: 3,
         margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
         child: Column(
           children: <Widget>[
-            Text('Project ID:\t$number'),
-            Text('Location:\tBangalore'),
-            Text('Travel Nature:\tProject Visit'),
+            Text('Project ID:\t$projectid'),
+            Text('Location:\t$location'),
+            Text('Travel Nature:\t$travelnature'),
 
             //TO SHOW STATUS OF REQUEST APPROVAL
             // Row(
@@ -75,7 +102,7 @@ class NewCard extends StatelessWidget {
             //   ],
             // ),
             Text(
-              'Date of Application: ${DateFormat('d/M/yyyy').format(DateTime.now()).toString()}',
+              'Date of Application: ${DateFormat('d/M/yyyy').format(appdate).toString()}',
             ),
             Divider(
               thickness: 1,
@@ -87,7 +114,7 @@ class NewCard extends StatelessWidget {
                   children: <Widget>[
                     Text('Budget',
                         style: TextStyle(color: Colors.green, fontSize: 15)),
-                    Text('\u20B9 12345',
+                    Text(numberformatter.format(budget).toString(),
                         style: TextStyle(color: Colors.green, fontSize: 20)),
                   ],
                 ),
@@ -95,7 +122,7 @@ class NewCard extends StatelessWidget {
                   children: <Widget>[
                     Text('Spent',
                         style: TextStyle(color: Colors.red, fontSize: 15)),
-                    Text('\u20B9 123',
+                    Text(numberformatter.format(spent).toString(),
                         style: TextStyle(color: Colors.red, fontSize: 20)),
                   ],
                 ),

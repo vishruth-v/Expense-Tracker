@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+final numberformatter = NumberFormat('\u20B9##,##,##0', 'en_GB');
 
 class CurrentProjectPage extends StatefulWidget {
   CurrentProjectPage({Key key}) : super(key: key);
@@ -8,6 +11,7 @@ class CurrentProjectPage extends StatefulWidget {
 }
 
 class _CurrentProjectPageState extends State<CurrentProjectPage> {
+  //final numberformatter = NumberFormat('\u20B9 ##,##,##0', 'en_GB');
   int _counter = 1;
   int _id = 0;
 
@@ -17,7 +21,7 @@ class _CurrentProjectPageState extends State<CurrentProjectPage> {
     _expenseList.insert(0, {
       'id': _id.toString(),
       'amount': '100',
-      'date': DateTime.now().toString(),
+      'date': DateFormat.yMMMd().format(DateTime.now()).toString(),
     });
   }
 
@@ -33,7 +37,7 @@ class _CurrentProjectPageState extends State<CurrentProjectPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Expense Track'),
+        title: Text('P&G Japan (Id: 1)'),
         actions: <Widget>[
           PopupMenuButton<String>(
             onSelected: (value) {
@@ -82,8 +86,7 @@ class _CurrentProjectPageState extends State<CurrentProjectPage> {
             return ExpenseCard(expense: _expenseList[index - 1]);
           }
         },
-        separatorBuilder: (BuildContext context, int index) =>
-            const Divider(),
+        separatorBuilder: (BuildContext context, int index) => const Divider(),
         itemCount: _counter,
       ),
       floatingActionButton: MyFloatingActionButton(
@@ -254,7 +257,7 @@ class _SummaryCardState extends State<SummaryCard> {
         height: 120,
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(20),
           border: Border.all(
             width: 0.1,
             color: Colors.grey.shade400,
@@ -262,8 +265,8 @@ class _SummaryCardState extends State<SummaryCard> {
           boxShadow: [
             BoxShadow(
               color: Colors.grey.shade300,
-              blurRadius: 1.0,
-              offset: Offset(0, 2),
+              blurRadius: 5.0,
+              offset: Offset(0, 5),
             ),
           ],
         ),
@@ -283,10 +286,10 @@ class _SummaryCardState extends State<SummaryCard> {
                   height: 5,
                 ),
                 Text(
-                  'Rs. 1000',
+                  numberformatter.format(1000).toString(),
                   style: TextStyle(
                     color: Colors.green,
-                    fontSize: 18,
+                    fontSize: 20,
                   ),
                 ),
               ],
@@ -303,10 +306,10 @@ class _SummaryCardState extends State<SummaryCard> {
                   height: 5,
                 ),
                 Text(
-                  'Rs. 500',
+                  numberformatter.format(500).toString(),
                   style: TextStyle(
                     color: Colors.red,
-                    fontSize: 18,
+                    fontSize: 20,
                   ),
                 ),
               ],
@@ -330,35 +333,41 @@ class ExpenseCard extends StatefulWidget {
 class _ExpenseCardState extends State<ExpenseCard> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(15.0),
-      child: Container(
-        height: 70,
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            width: 0.1,
-            color: Colors.grey.shade400,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade300,
-              blurRadius: 1.0,
-              offset: Offset(0, 1),
+    return GestureDetector(
+      child: Padding(
+        padding: EdgeInsets.all(15.0),
+        child: Container(
+          height: 70,
+          decoration: BoxDecoration(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              width: 0.1,
+              color: Colors.grey.shade400,
             ),
-          ],
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Text("Id: ${widget.expense["id"]}"),
-            Text("Amount: Rs. ${widget.expense["amount"]}"),
-            Text("Date: ${widget.expense["date"].substring(0, 19)}"),
-          ],
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade300,
+                blurRadius: 1.0,
+                offset: Offset(0, 1),
+              ),
+            ],
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Text("Id: ${widget.expense["id"]}"),
+              Text(
+                  "Amount: ${numberformatter.format(double.parse(widget.expense["amount"]))}"),
+              Text("Date: ${widget.expense["date"]}"),
+            ],
+          ),
         ),
       ),
+      onTap: () {
+        Navigator.pushNamed(context, '/expense');
+      },
     );
   }
 }
