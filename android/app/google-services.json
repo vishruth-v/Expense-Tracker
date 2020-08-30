@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "610222682915",
+    "firebase_url": "https://expense-tracker-2cde6.firebaseio.com",
+    "project_id": "expense-tracker-2cde6",
+    "storage_bucket": "expense-tracker-2cde6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610222682915:android:672c7c43ac2474a3719296",
+        "android_client_info": {
+          "package_name": "com.example.expense_track"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610222682915-mfucc1cjuh7ufckc0s8laff870sacfvu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-58PdocdWRAvYgNL7Ski1xcCBip1Ba1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610222682915-mfucc1cjuh7ufckc0s8laff870sacfvu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610222682915:android:74d371d7a5b60dee719296",
+        "android_client_info": {
+          "package_name": "com.example.mlkit_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610222682915-mfucc1cjuh7ufckc0s8laff870sacfvu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-58PdocdWRAvYgNL7Ski1xcCBip1Ba1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610222682915-mfucc1cjuh7ufckc0s8laff870sacfvu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610222682915:android:c547da90d7b5f73a719296",
+        "android_client_info": {
+          "package_name": "com.new.expense"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610222682915-mfucc1cjuh7ufckc0s8laff870sacfvu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-58PdocdWRAvYgNL7Ski1xcCBip1Ba1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610222682915-mfucc1cjuh7ufckc0s8laff870sacfvu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
